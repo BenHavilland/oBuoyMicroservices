@@ -1,0 +1,14 @@
+{
+  "name": "buoy-radius-query",
+  "version": "1.0.0",
+  "description": "A fullstack Alpha build for tracking buoys and",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.62.0",
+    "dynamodb-geo": "^0.3.1",
+    "long": "^3.2.0"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": ""
+}
