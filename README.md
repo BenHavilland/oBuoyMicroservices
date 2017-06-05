@@ -1,11 +1,11 @@
 # oBuoyMicroservices
 backend for oBuoy
 
-# buoyRadiusQuery
+## buoyRadiusQuery
 https://github.com/clickyspinny/oBuoyMicroservices/tree/master/buoyRadiusQuery
 
-# buoyGetRecord
+## buoyGetRecord
 https://github.com/clickyspinny/oBuoyMicroservices/tree/master/buoyGetRecord
 
-# buoyMakeGeoTable
+## buoyMakeGeoTable
 https://github.com/clickyspinny/oBuoyMicroservices/tree/master/buoyMakeGeoTable
