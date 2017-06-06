@@ -23,7 +23,7 @@ exports.handler = function (event, context, callback) {
     // Configuration for a new instance of a GeoDataManager.
     const config = new ddbGeo.GeoDataManagerConfiguration(ddb, 'liveBuoyData');
     // match the hashKeyLength of the Java library this was ported from
-    config.hashKeyLength = 6;
+    config.hashKeyLength = 3;
     // Instantiate the table manager
     // Each instance represents a table with magic geo queries available
     const buoysManager = new ddbGeo.GeoDataManager(config);
