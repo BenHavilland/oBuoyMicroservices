@@ -18,13 +18,16 @@ const ddb = new AWS.DynamoDB();
 // Configuration for a new instance of a GeoDataManager.
 // Each instance represents a table with magic geo queries available
 const config = new ddbGeo.GeoDataManagerConfiguration(ddb, 'liveBuoyData');
+// match the hashKeyLength of the Java library this was ported from
+config.hashKeyLength = 6;
 // Instantiate the table manager
 const buoysManager = new ddbGeo.GeoDataManager(config);
 // Use GeoTableUtil to help construct a CreateTableInput.
 // This is used if no table exists
 const createTableInput = ddbGeo.GeoTableUtil.getCreateTableRequest(config);
 // Configure options for new table
-createTableInput.ProvisionedThroughput.ReadCapacityUnits = 2;
+createTableInput.ProvisionedThroughput.ReadCapacityUnits = 75;
+createTableInput.ProvisionedThroughput.WriteCapacityUnits = 50;
 
 exports.handler = function (event, context, callback) {
     // deployment helper, if the table's not there let's create it

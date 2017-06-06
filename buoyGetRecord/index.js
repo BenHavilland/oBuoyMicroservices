@@ -16,6 +16,8 @@ const ddbClient = new AWS.DynamoDB.DocumentClient();
 // Configuration for a new instance of a GeoDataManager.
 // Each instance represents a table with magic geo queries available
 const config = new ddbGeo.GeoDataManagerConfiguration(ddb, 'liveBuoyData');
+// match the hashKeyLength of the Java library this was ported from
+config.hashKeyLength = 6;
 // Instantiate the table manager
 const buoysManager = new ddbGeo.GeoDataManager(config);
 
@@ -64,6 +66,7 @@ exports.handler = function (event, context, callback) {
             .then(function (){
                 // table exists, db is ready, time to fire off the query
                 ddbClient.query(params).promise()
+                .catch(console.warn)
                 .then(function(data) {
                     var returnData = {
                         "statusCode": 200,
@@ -71,11 +74,12 @@ exports.handler = function (event, context, callback) {
                             "Access-Control-Allow-Origin": "*",
                             "Content-Type": "application/json"
                         },
-                        "body": JSON.stringify(data.Items)
+                        "body": JSON.stringify([data.Items[0]])// only return 1
                         }
                     callback(null,returnData);
-                }).catch(console.warn);
-            });
+                });
+            })
+            .catch(console.warn);
             break;
         case 'update':
             //not allowed on this service
@@ -87,7 +91,6 @@ exports.handler = function (event, context, callback) {
             //not allowed on this service
             break;
         default:
-            console.log('in default');
             var returnData = {
                 "statusCode": 200,
                 "headers": {
